@@ -1,0 +1,813 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Task List API",
+    "description": "API da lista de tarefas",
+    "contact": {
+      "email": "crhistiandeoliveira@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "users",
+      "description": "Criação de usuários"
+    },
+    {
+      "name": "tasks",
+      "description": "CRUD de tarefas"
+    }
+  ],
+  "paths": {
+    "/user/": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "criação de usuário",
+        "description": "Cria um novo usuário na database",
+        "operationId": "createAcc",
+        "requestBody": {
+          "description": "Nova conta",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/newAcc"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuário criado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/newAcc201"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Username indisponível, campo obrigatório não preenchido, campo 'pass' e 'Rpass' diferentes um do outro, ou campos com menos de 5 caracteres.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/newAcc403"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro de servidor desconhecido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unknown500"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "login de usuário",
+        "description": "Loga usuário na aplicação",
+        "operationId": "login",
+        "requestBody": {
+          "description": "login de usuário",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/loginAcc"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Usuário logado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loginAcc200"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Campo obrigatório não preenchido, campos com menos de 5 caracteres ou senha incorreta.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loginAcc403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loginAcc403"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro de servidor desconhecido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loginAcc404"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/task/readTasksByUserId": {
+      "get": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Leitura de tarefas",
+        "description": "Busca as tarefas de um usuário pelo seu id.",
+        "operationId": "readTasksByUserId",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "Token de autenticação JWT stringficado recebido no login",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca de tarefas com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getTasks200"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token informado é inválido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getTasks401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Token não informado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getTasks403"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro de servidor desconhecido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unknown500"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/task/": {
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "criação de tarefa",
+        "description": "Cria uma nova tarefa na database",
+        "operationId": "createTask",
+        "requestBody": {
+          "description": "Nova tarefa",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/newTask"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Tarefa criada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/createTasks201"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token informado é inválido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getTasks401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Campo obrigatório não preenchido, campo preenchido excede o limite máximo de caracteres ou token não informado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/createTasks403"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro de servidor desconhecido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unknown500"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "edição de tarefa",
+        "description": "Edita uma tarefa existente na database",
+        "operationId": "updateTask",
+        "requestBody": {
+          "description": "Edição de tarefa",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/editTask"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tarefa editada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/updateTasks200"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token informado é inválido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getTasks401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Campo obrigatório não preenchido, campo preenchido excede o limite máximo de caracteres, token não informado ou id da tarefa não informado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/createTasks403"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro de servidor desconhecido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unknown500"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "exclusão de tarefa",
+        "description": "Exclui uma tarefa existente na database",
+        "operationId": "deleteTask",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "Token de autenticação JWT stringficado",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Id da tarefa",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tarefa editada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/updateTasks200"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token informado é inválido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getTasks401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Token não informado ou id da tarefa não informado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/deleteTasks403"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro de servidor desconhecido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unknown500"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "newAcc": {
+        "required": [
+          "Rpass",
+          "name",
+          "pass"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "BreadPitt"
+          },
+          "pass": {
+            "type": "string",
+            "example": "123@dog"
+          },
+          "Rpass": {
+            "type": "string",
+            "example": "123@dog"
+          }
+        }
+      },
+      "newAcc201": {
+        "required": [
+          "data",
+          "ok"
+        ],
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "string",
+            "example": "Conta de BreadPitt criada com sucesso"
+          }
+        }
+      },
+      "newAcc403": {
+        "required": [
+          "data",
+          "error",
+          "ok"
+        ],
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "example": false
+          },
+          "error": {
+            "type": "string",
+            "example": "Informe um nome e uma senha"
+          },
+          "data": {
+            "type": "string",
+            "example": "ControllerError"
+          }
+        }
+      },
+      "loginAcc": {
+        "required": [
+          "name",
+          "pass"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "BreadPitt"
+          },
+          "pass": {
+            "type": "string",
+            "example": "123@dog"
+          }
+        }
+      },
+      "loginAcc200": {
+        "required": [
+          "data",
+          "ok"
+        ],
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjM0NTY3ODkwIiwidXNlck5hbWUiOiJCcmVhZFBpdHQifQ.wksSRCfyg11SstDLjMhz7UA3izJ7LwJgwwSZYfkmAgQ"
+          }
+        }
+      },
+      "loginAcc403": {
+        "required": [
+          "data",
+          "error",
+          "ok"
+        ],
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "example": false
+          },
+          "error": {
+            "type": "string",
+            "example": "Senha incorreta"
+          },
+          "data": {
+            "type": "string",
+            "example": "DomainError"
+          }
+        }
+      },
+      "loginAcc404": {
+        "required": [
+          "data",
+          "error",
+          "ok"
+        ],
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "example": false
+          },
+          "error": {
+            "type": "string",
+            "example": "BreadPitt não encontrado"
+          },
+          "data": {
+            "type": "string",
+            "example": "NotFoundError"
+          }
+        }
+      },
+      "task": {
+        "required": [
+          "description",
+          "detail"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
+          },
+          "description": {
+            "type": "string",
+            "example": "xixi do Pitt"
+          },
+          "detail": {
+            "type": "string",
+            "example": "levar o pitt mijar lá em baixo na hora do almoço"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2022-04-08T00:09:57.475Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2022-04-12T17:23:52.035Z"
+          }
+        }
+      },
+      "newTask": {
+        "required": [
+          "description",
+          "detail",
+          "token"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "example": "xixi do Pitt"
+          },
+          "detail": {
+            "type": "string",
+            "example": "levar o pitt mijar lá em baixo na hora do almoço"
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJJZCI6IjAwMDAwMDAwLTAwMDAtMDAwMC0wMDAwLTAwMDAwMDAwMDAwMCIsInVzZXJOYW1lIjoiQnJlYWRQaXR0In0sImlhdCI6MTY1MjU1OTE5NCwiZXhwIjoxNjUyNTYyNzk0fQ.eSrCeuiBDObuNQ4Ne8pWKsy2Pd0m_loJrqSUqUJWnzc"
+          }
+        }
+      },
+      "createdTask": {
+        "required": [
+          "description",
+          "detail"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
+          },
+          "description": {
+            "type": "string",
+            "example": "xixi do Pitt"
+          },
+          "detail": {
+            "type": "string",
+            "example": "levar o pitt mijar lá em baixo na hora do almoço"
+          },
+          "user_id": {
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2022-04-08T00:09:57.475Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2022-04-12T17:23:52.035Z"
+          }
+        }
+      },
+      "editTask": {
+        "required": [
+          "description",
+          "detail",
+          "id",
+          "token"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
+          },
+          "description": {
+            "type": "string",
+            "example": "xixi do Pitt"
+          },
+          "detail": {
+            "type": "string",
+            "example": "levar o pitt mijar lá em baixo na hora do almoço"
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJJZCI6IjAwMDAwMDAwLTAwMDAtMDAwMC0wMDAwLTAwMDAwMDAwMDAwMCIsInVzZXJOYW1lIjoiQnJlYWRQaXR0In0sImlhdCI6MTY1MjU1OTE5NCwiZXhwIjoxNjUyNTYyNzk0fQ.eSrCeuiBDObuNQ4Ne8pWKsy2Pd0m_loJrqSUqUJWnzc"
+          }
+        }
+      },
+      "getTasks200": {
+        "required": [
+          "data",
+          "ok"
+        ],
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/task"
+            }
+          }
+        }
+      },
+      "getTasks401": {
+        "required": [
+          "data",
+          "error",
+          "ok"
+        ],
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "example": false
+          },
+          "error": {
+            "type": "string",
+            "example": "Não autorizado."
+          },
+          "data": {
+            "type": "string",
+            "example": "DomainError"
+          }
+        }
+      },
+      "getTasks403": {
+        "required": [
+          "data",
+          "error",
+          "ok"
+        ],
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "example": false
+          },
+          "error": {
+            "type": "string",
+            "example": "Usuário sem token, necessário novo login."
+          },
+          "data": {
+            "type": "string",
+            "example": "ControllerError"
+          }
+        }
+      },
+      "createTasks201": {
+        "required": [
+          "data",
+          "ok"
+        ],
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/createdTask"
+          }
+        }
+      },
+      "createTasks403": {
+        "required": [
+          "data",
+          "error",
+          "ok"
+        ],
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "example": false
+          },
+          "error": {
+            "type": "string",
+            "example": "Insira uma descrição e um detalhamento."
+          },
+          "data": {
+            "type": "string",
+            "example": "ControllerError"
+          }
+        }
+      },
+      "updateTasks200": {
+        "required": [
+          "ok"
+        ],
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "deleteTasks403": {
+        "required": [
+          "data",
+          "error",
+          "ok"
+        ],
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "example": false
+          },
+          "error": {
+            "type": "string",
+            "example": "Usuário sem token, necessário novo login."
+          },
+          "data": {
+            "type": "string",
+            "example": "ControllerError"
+          }
+        }
+      },
+      "unknown500": {
+        "required": [
+          "data",
+          "error",
+          "ok"
+        ],
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "example": false
+          },
+          "error": {
+            "type": "string",
+            "example": "Erro"
+          },
+          "data": {
+            "type": "string",
+            "example": "Erro desconhecido"
+          }
+        }
+      }
+    }
+  }
+}
