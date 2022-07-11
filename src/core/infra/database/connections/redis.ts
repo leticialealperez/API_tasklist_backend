@@ -4,8 +4,7 @@ export class RedisConnection {
   private static _connection: Redis;
 
   static async initConnection(): Promise<void> {
-    if (!this._connection)
-      this._connection = new redis(process.env.REDISCLOUD_URL);
+    if (!this._connection) this._connection = new redis(process.env.REDIS_URL);
   }
 
   static getConnection(): Redis {
