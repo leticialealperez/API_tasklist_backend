@@ -3,9 +3,6 @@
   "info": {
     "title": "Task List API",
     "description": "API da lista de tarefas",
-    "contact": {
-      "email": "crhistiandeoliveira@gmail.com"
-    },
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
@@ -25,9 +22,7 @@
   "paths": {
     "/user/": {
       "post": {
-        "tags": [
-          "users"
-        ],
+        "tags": ["users"],
         "summary": "criação de usuário",
         "description": "Cria um novo usuário na database",
         "operationId": "createAcc",
@@ -77,9 +72,7 @@
     },
     "/user/login": {
       "post": {
-        "tags": [
-          "users"
-        ],
+        "tags": ["users"],
         "summary": "login de usuário",
         "description": "Loga usuário na aplicação",
         "operationId": "login",
@@ -139,9 +132,7 @@
     },
     "/task/readTasksByUserId": {
       "get": {
-        "tags": [
-          "tasks"
-        ],
+        "tags": ["tasks"],
         "summary": "Leitura de tarefas",
         "description": "Busca as tarefas de um usuário pelo seu id.",
         "operationId": "readTasksByUserId",
@@ -204,9 +195,7 @@
     },
     "/task/": {
       "post": {
-        "tags": [
-          "tasks"
-        ],
+        "tags": ["tasks"],
         "summary": "criação de tarefa",
         "description": "Cria uma nova tarefa na database",
         "operationId": "createTask",
@@ -264,9 +253,7 @@
         }
       },
       "put": {
-        "tags": [
-          "tasks"
-        ],
+        "tags": ["tasks"],
         "summary": "edição de tarefa",
         "description": "Edita uma tarefa existente na database",
         "operationId": "updateTask",
@@ -324,9 +311,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "tasks"
-        ],
+        "tags": ["tasks"],
         "summary": "exclusão de tarefa",
         "description": "Exclui uma tarefa existente na database",
         "operationId": "deleteTask",
@@ -402,11 +387,7 @@
   "components": {
     "schemas": {
       "newAcc": {
-        "required": [
-          "Rpass",
-          "name",
-          "pass"
-        ],
+        "required": ["Rpass", "name", "pass"],
         "type": "object",
         "properties": {
           "name": {
@@ -424,10 +405,7 @@
         }
       },
       "newAcc201": {
-        "required": [
-          "data",
-          "ok"
-        ],
+        "required": ["data", "ok"],
         "type": "object",
         "properties": {
           "ok": {
@@ -441,11 +419,7 @@
         }
       },
       "newAcc403": {
-        "required": [
-          "data",
-          "error",
-          "ok"
-        ],
+        "required": ["data", "error", "ok"],
         "type": "object",
         "properties": {
           "ok": {
@@ -463,10 +437,7 @@
         }
       },
       "loginAcc": {
-        "required": [
-          "name",
-          "pass"
-        ],
+        "required": ["name", "pass"],
         "type": "object",
         "properties": {
           "name": {
@@ -480,10 +451,7 @@
         }
       },
       "loginAcc200": {
-        "required": [
-          "data",
-          "ok"
-        ],
+        "required": ["data", "ok"],
         "type": "object",
         "properties": {
           "ok": {
@@ -497,11 +465,7 @@
         }
       },
       "loginAcc403": {
-        "required": [
-          "data",
-          "error",
-          "ok"
-        ],
+        "required": ["data", "error", "ok"],
         "type": "object",
         "properties": {
           "ok": {
@@ -519,11 +483,7 @@
         }
       },
       "loginAcc404": {
-        "required": [
-          "data",
-          "error",
-          "ok"
-        ],
+        "required": ["data", "error", "ok"],
         "type": "object",
         "properties": {
           "ok": {
@@ -541,10 +501,7 @@
         }
       },
       "task": {
-        "required": [
-          "description",
-          "detail"
-        ],
+        "required": ["description", "detail"],
         "type": "object",
         "properties": {
           "id": {
@@ -570,11 +527,7 @@
         }
       },
       "newTask": {
-        "required": [
-          "description",
-          "detail",
-          "token"
-        ],
+        "required": ["description", "detail", "token"],
         "type": "object",
         "properties": {
           "description": {
@@ -592,10 +545,7 @@
         }
       },
       "createdTask": {
-        "required": [
-          "description",
-          "detail"
-        ],
+        "required": ["description", "detail"],
         "type": "object",
         "properties": {
           "id": {
@@ -625,12 +575,7 @@
         }
       },
       "editTask": {
-        "required": [
-          "description",
-          "detail",
-          "id",
-          "token"
-        ],
+        "required": ["description", "detail", "id", "token"],
         "type": "object",
         "properties": {
           "id": {
@@ -652,10 +597,7 @@
         }
       },
       "getTasks200": {
-        "required": [
-          "data",
-          "ok"
-        ],
+        "required": ["data", "ok"],
         "type": "object",
         "properties": {
           "ok": {
@@ -671,11 +613,7 @@
         }
       },
       "getTasks401": {
-        "required": [
-          "data",
-          "error",
-          "ok"
-        ],
+        "required": ["data", "error", "ok"],
         "type": "object",
         "properties": {
           "ok": {
@@ -693,11 +631,7 @@
         }
       },
       "getTasks403": {
-        "required": [
-          "data",
-          "error",
-          "ok"
-        ],
+        "required": ["data", "error", "ok"],
         "type": "object",
         "properties": {
           "ok": {
@@ -715,10 +649,7 @@
         }
       },
       "createTasks201": {
-        "required": [
-          "data",
-          "ok"
-        ],
+        "required": ["data", "ok"],
         "type": "object",
         "properties": {
           "ok": {
@@ -731,11 +662,7 @@
         }
       },
       "createTasks403": {
-        "required": [
-          "data",
-          "error",
-          "ok"
-        ],
+        "required": ["data", "error", "ok"],
         "type": "object",
         "properties": {
           "ok": {
@@ -753,9 +680,7 @@
         }
       },
       "updateTasks200": {
-        "required": [
-          "ok"
-        ],
+        "required": ["ok"],
         "type": "object",
         "properties": {
           "ok": {
@@ -765,11 +690,7 @@
         }
       },
       "deleteTasks403": {
-        "required": [
-          "data",
-          "error",
-          "ok"
-        ],
+        "required": ["data", "error", "ok"],
         "type": "object",
         "properties": {
           "ok": {
@@ -787,11 +708,7 @@
         }
       },
       "unknown500": {
-        "required": [
-          "data",
-          "error",
-          "ok"
-        ],
+        "required": ["data", "error", "ok"],
         "type": "object",
         "properties": {
           "ok": {
