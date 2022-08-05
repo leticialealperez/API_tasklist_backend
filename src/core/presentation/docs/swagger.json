@@ -392,15 +392,15 @@
         "properties": {
           "name": {
             "type": "string",
-            "example": "BreadPitt"
+            "example": "teste10@teste.com"
           },
           "pass": {
             "type": "string",
-            "example": "123@dog"
+            "example": "1234@"
           },
           "Rpass": {
             "type": "string",
-            "example": "123@dog"
+            "example": "1234@"
           }
         }
       },
@@ -414,7 +414,7 @@
           },
           "data": {
             "type": "string",
-            "example": "Conta de BreadPitt criada com sucesso"
+            "example": "Conta de teste10@teste.com criada com sucesso"
           }
         }
       },
@@ -442,11 +442,11 @@
         "properties": {
           "name": {
             "type": "string",
-            "example": "BreadPitt"
+            "example": "teste10@teste.com"
           },
           "pass": {
             "type": "string",
-            "example": "123@dog"
+            "example": "1234@"
           }
         }
       },
@@ -492,7 +492,7 @@
           },
           "error": {
             "type": "string",
-            "example": "BreadPitt não encontrado"
+            "example": "teste10@teste.com não encontrado"
           },
           "data": {
             "type": "string",
