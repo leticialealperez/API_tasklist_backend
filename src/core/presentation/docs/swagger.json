@@ -510,11 +510,11 @@
           },
           "description": {
             "type": "string",
-            "example": "xixi do Pitt"
+            "example": "Estudar o Growbase"
           },
           "detail": {
             "type": "string",
-            "example": "levar o pitt mijar lá em baixo na hora do almoço"
+            "example": "Estudar sobre base de projetos e Redux Toolkit"
           },
           "created_at": {
             "type": "string",
@@ -532,11 +532,11 @@
         "properties": {
           "description": {
             "type": "string",
-            "example": "xixi do Pitt"
+            "example": "Estudar o Growbase"
           },
           "detail": {
             "type": "string",
-            "example": "levar o pitt mijar lá em baixo na hora do almoço"
+            "example": "Estudar sobre base de projetos e Redux Toolkit"
           },
           "token": {
             "type": "string",
@@ -554,11 +554,11 @@
           },
           "description": {
             "type": "string",
-            "example": "xixi do Pitt"
+            "example": "Estudar Growbase"
           },
           "detail": {
             "type": "string",
-            "example": "levar o pitt mijar lá em baixo na hora do almoço"
+            "example": "Estudar sobre base de projetos e Redux Toolkit"
           },
           "user_id": {
             "type": "string",
@@ -584,11 +584,11 @@
           },
           "description": {
             "type": "string",
-            "example": "xixi do Pitt"
+            "example": "Estudar Growbase"
           },
           "detail": {
             "type": "string",
-            "example": "levar o pitt mijar lá em baixo na hora do almoço"
+            "example": "Estudar sobre base de projetos e Redux Toolkit"
           },
           "token": {
             "type": "string",
