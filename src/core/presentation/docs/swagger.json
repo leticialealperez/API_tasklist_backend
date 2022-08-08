@@ -413,8 +413,12 @@
             "example": true
           },
           "data": {
-            "type": "string",
-            "example": "Conta de teste10@teste.com criada com sucesso"
+            "type": "object",
+            "example": {
+              "id": "0000000-0000-0000-0000-000000000000",
+              "name": "teste10@teste.com",
+              "tasks": "[]"
+            }
           }
         }
       },
