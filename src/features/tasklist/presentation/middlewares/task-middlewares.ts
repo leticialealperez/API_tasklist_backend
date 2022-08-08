@@ -12,16 +12,29 @@ class TaskMiddlewares {
     let detail = req.body.detail as string;
 
     if (!description && !detail) {
-      return serverError(res, new ControllerError('Insira uma descrição e um detalhamento.', 403));
+      return serverError(
+        res,
+        new ControllerError('Insira uma descrição e um detalhamento.', 403)
+      );
     } else if (!description) {
-      return serverError(res, new ControllerError('Insira uma descrição.', 403));
+      return serverError(
+        res,
+        new ControllerError('Insira uma descrição.', 403)
+      );
     } else if (!detail) {
-      return serverError(res, new ControllerError('Insira um detalhamento.', 403));
+      return serverError(
+        res,
+        new ControllerError('Insira um detalhamento.', 403)
+      );
     }
     next();
   };
 
-  static VerifyMaxLenght = (req: Request, res: Response, next: NextFunction) => {
+  static VerifyMaxLenght = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     let description = req.body.description as string;
     let detail = req.body.detail as string;
 
@@ -55,7 +68,10 @@ class TaskMiddlewares {
     let id: string = req.body.id;
 
     if (!id) {
-      return serverError(res, new ControllerError('Id da tarefa não informado.', 403));
+      return serverError(
+        res,
+        new ControllerError('Id da tarefa não informado.', 403)
+      );
     }
     next();
   };
@@ -64,12 +80,19 @@ class TaskMiddlewares {
     let id = req.query.id as string;
 
     if (!id) {
-      return serverError(res, new ControllerError('Id da tarefa não informado.', 403));
+      return serverError(
+        res,
+        new ControllerError('Id da tarefa não informado.', 403)
+      );
     }
     next();
   };
 
-  static VerifyBodyToken = (req: Request, res: Response, next: NextFunction) => {
+  static VerifyBodyToken = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     let token = req.body.token as string;
     if (!token) {
       return serverError(
@@ -85,7 +108,11 @@ class TaskMiddlewares {
     next();
   };
 
-  static VerifyQueryToken = (req: Request, res: Response, next: NextFunction) => {
+  static VerifyQueryToken = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     let token = req.query.token as string;
     if (!token) {
       return serverError(
@@ -93,7 +120,6 @@ class TaskMiddlewares {
         new ControllerError('Usuário sem token, necessário novo login.', 403)
       );
     }
-    token = JSON.parse(token);
     try {
       TokenGenerator.verifyToken(token);
     } catch (error) {

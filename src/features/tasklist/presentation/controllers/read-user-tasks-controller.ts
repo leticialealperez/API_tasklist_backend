@@ -1,5 +1,8 @@
 import { ReadUserTasksUsecase } from '../../domain/usecases/read-user-tasks/read-user-tasks-usecase';
-import { ok, serverError } from '../../../../core/presentation/helper/http-handler';
+import {
+  ok,
+  serverError,
+} from '../../../../core/presentation/helper/http-handler';
 import { Request, Response } from 'express';
 import { Controller } from '../../../../core/presentation/contract/controller';
 
@@ -8,7 +11,7 @@ export class ReadUserTasksController implements Controller {
 
   async execute(req: Request, res: Response) {
     try {
-      let token = JSON.parse(req.query.token as string);
+      let token = req.query.token as string;
 
       let data = {
         token,
