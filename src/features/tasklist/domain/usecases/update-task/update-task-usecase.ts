@@ -3,11 +3,13 @@ import { UseCase } from '../../../../../core/domain/contract/usecase';
 import { ITask } from '../../models/task';
 import { TokenGenerator } from '../../../../../core/infra/adapters/jwt-adapter';
 import { IUpdateTaskParams } from './models/update-task-params';
-import { TelegramBot } from '../../../../../core/infra/bots/telegram-bot';
 import { ITaskRepository } from '../../models/task-repository';
 
 export class UpdateTaskUsecase implements UseCase {
-  constructor(private repository: ITaskRepository, private cacheRepository: ICacheRepository) {}
+  constructor(
+    private repository: ITaskRepository,
+    private cacheRepository: ICacheRepository
+  ) {}
 
   async run(data: IUpdateTaskParams) {
     // pega o payload do token
@@ -22,13 +24,13 @@ export class UpdateTaskUsecase implements UseCase {
     };
 
     // atualiza a tarefa
-    let updatedTask = await this.repository.update(data.task.id as string, newTask);
+    let updatedTask = await this.repository.update(
+      data.task.id as string,
+      newTask
+    );
 
     // apaga o cache
     await this.cacheRepository.flush();
-
-    // bot de telegram
-    new TelegramBot().updateTaskMessage(userName, newTask.description, newTask.detail);
 
     return updatedTask;
   }

@@ -80,7 +80,9 @@ describe('feature User - teste de user-create-controller', () => {
         expect(res.status).toEqual(403);
         expect(res.body.ok).toEqual(false);
         expect(res.body.identifier).toEqual('ControllerError');
-        expect(res.body.error).toEqual('O nome name não possui o mínimo de 5 caracteres.');
+        expect(res.body.error).toEqual(
+          'O nome name não possui o mínimo de 5 caracteres.'
+        );
       });
   });
   test('should fail to create an user with short pass', async () => {
@@ -91,12 +93,16 @@ describe('feature User - teste de user-create-controller', () => {
         expect(res.status).toEqual(403);
         expect(res.body.ok).toEqual(false);
         expect(res.body.identifier).toEqual('ControllerError');
-        expect(res.body.error).toEqual('A senha informada não possui o mínimo de 5 caracteres.');
+        expect(res.body.error).toEqual(
+          'A senha informada não possui o mínimo de 5 caracteres.'
+        );
       });
   });
   test('should fail to create an user with duplicated error', async () => {
     let fakeName: string = GenerateUid.newUUID();
-    await request(app).post('/user/').send({ name: fakeName, pass: 'any_pass', Rpass: 'any_pass' });
+    await request(app)
+      .post('/user/')
+      .send({ name: fakeName, pass: 'any_pass', Rpass: 'any_pass' });
     await request(app)
       .post('/user/')
       .send({ name: fakeName, pass: 'any_pass', Rpass: 'any_pass' })
@@ -116,7 +122,6 @@ describe('feature User - teste de user-create-controller', () => {
       .expect((res) => {
         expect(res.status).toEqual(201);
         expect(res.body.ok).toEqual(true);
-        expect(res.body.data).toEqual(`Conta de '${fakeName}' criada com sucesso.`);
       });
   });
 });

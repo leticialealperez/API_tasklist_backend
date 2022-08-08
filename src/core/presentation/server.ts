@@ -7,13 +7,15 @@ import { makeDocs } from './docs/docs';
 export const createServer: () => Express = () => {
   const app: Express = express();
   app.use(express.json());
-  app.use(cors());
+  app.use(cors({ allowedHeaders: '*' }));
   makeRoutes(app);
-  makeDocs(app)
+  makeDocs(app);
   return app;
 };
 
 export const initServer = async (app?: Express | undefined) => {
   app = app ?? createServer();
-  await app.listen(process.env.PORT || 8081, () => console.log('Servidor rodando...'));
+  await app.listen(process.env.PORT || 8081, () =>
+    console.log('Servidor rodando...')
+  );
 };
