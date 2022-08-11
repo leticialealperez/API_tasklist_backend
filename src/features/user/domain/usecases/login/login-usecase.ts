@@ -36,6 +36,6 @@ export class LoginUseCase implements UseCase {
     };
     let token = TokenGenerator.newToken(payload);
 
-    return token;
+    return { payload, token };
   }
 }
