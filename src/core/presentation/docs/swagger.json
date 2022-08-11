@@ -463,8 +463,21 @@
             "example": true
           },
           "data": {
-            "type": "string",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjM0NTY3ODkwIiwidXNlck5hbWUiOiJCcmVhZFBpdHQifQ.wksSRCfyg11SstDLjMhz7UA3izJ7LwJgwwSZYfkmAgQ"
+            "type": "object",
+            "properties": {
+              "userId": {
+                "type": "string",
+                "example": "0000000-0000-0000-0000-000000000000"
+              },
+              "userName": {
+                "type": "string",
+                "example": "teste10@teste.com"
+              },
+              "token": {
+                "type": "string",
+                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjM0NTY3ODkwIiwidXNlck5hbWUiOiJCcmVhZFBpdHQifQ.wksSRCfyg11SstDLjMhz7UA3izJ7LwJgwwSZYfkmAgQ"
+              }
+            }
           }
         }
       },
