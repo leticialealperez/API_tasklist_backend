@@ -36,6 +36,12 @@ export class LoginUseCase implements UseCase {
     };
     let token = TokenGenerator.newToken(payload);
 
-    return { payload, token };
+    const dataReturn = {
+      userId,
+      userName,
+      token
+    }
+
+    return dataReturn;
   }
 }

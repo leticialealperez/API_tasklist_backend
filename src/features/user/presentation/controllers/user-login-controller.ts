@@ -8,12 +8,12 @@ export class UserLoginController implements Controller {
 
     async execute(req: Request, res: Response) {
         try {
-            const token = await this.loginUseCase.run({
+            const data = await this.loginUseCase.run({
                 name: req.body.name,
                 pass: req.body.pass,
             });
 
-            return ok(res, token);
+            return ok(res, data);
         } catch (error) {
             return serverError(res, error);
         }
