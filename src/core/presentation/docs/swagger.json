@@ -320,7 +320,7 @@
             "name": "token",
             "in": "query",
             "description": "Token de autenticação JWT stringficado",
-            "required": false,
+            "required": true,
             "style": "form",
             "explode": true,
             "schema": {
@@ -329,9 +329,9 @@
           },
           {
             "name": "id",
-            "in": "query",
+            "in": "path",
             "description": "Id da tarefa",
-            "required": false,
+            "required": true,
             "style": "form",
             "explode": true,
             "schema": {
@@ -341,11 +341,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Tarefa editada",
+            "description": "Tarefa excluida",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/updateTasks200"
+                  "$ref": "#/components/schemas/deleteTasks200"
                 }
               }
             }
@@ -703,6 +703,25 @@
           "ok": {
             "type": "boolean",
             "example": true
+          }
+        }
+      },
+      "deleteTasks200": {
+        "required": ["ok"],
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "deleted": {
+                "type": "string",
+                "example": "1"
+              }
+            }
           }
         }
       },

@@ -47,7 +47,7 @@ export class TaskRouter {
       updateTaskController.execute(req, res)
     );
 
-    routes.delete('/', deleteTaskMids, (req: Request, res: Response) =>
+    routes.delete('/:id', deleteTaskMids, (req: Request, res: Response) =>
       deleteTaskController.execute(req, res)
     );
 

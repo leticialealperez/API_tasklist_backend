@@ -23,6 +23,8 @@ export class DeleteTaskUsecase implements UseCase {
     // apaga o cache
     await this.cacheRepository.flush();
 
-    return deletedTask;
+    return {
+      deleted: deletedTask.affected
+    };
   }
 }

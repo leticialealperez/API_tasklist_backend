@@ -9,8 +9,8 @@ export class DeleteTaskController implements Controller {
 
     async execute(req: Request, res: Response) {
         try {
-            let token = JSON.parse(req.query.token as string);
-            let id = req.query.id as string;
+            let token = req.query.token as string;
+            let id = req.params.id
 
             let data: IDeleteTaskParams = {
                 token,

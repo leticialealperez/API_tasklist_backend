@@ -77,7 +77,7 @@ class TaskMiddlewares {
   };
 
   static VerifyQueryId = (req: Request, res: Response, next: NextFunction) => {
-    let id = req.query.id as string;
+    let id = req.params.id;
 
     if (!id) {
       return serverError(
