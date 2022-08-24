@@ -309,7 +309,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/task/{id}":{
       "delete": {
         "tags": ["tasks"],
         "summary": "exclusão de tarefa",
@@ -332,8 +334,6 @@
             "in": "path",
             "description": "Id da tarefa",
             "required": true,
-            "style": "form",
-            "explode": true,
             "schema": {
               "type": "string"
             }
